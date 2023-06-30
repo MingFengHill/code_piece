@@ -1,0 +1,5 @@
+title:K-means Result
+xlabel:xlabel
+ylabel:ylable
+cluster1:cluster1
+cluster2:cluster2

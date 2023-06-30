@@ -39,7 +39,27 @@ def make_circumcircle(p1, p2, p3):
     return (ux, uy, r)
 
 
+legend_dic = {"title": "K-means Result",
+              "xlabel": "x-label",
+              "ylabel": "y-label",
+              "cluster1": "cluster1",
+              "cluster2": "cluster2"}
+
+
+def read_legend():
+    with open("legend.txt", 'r') as f:
+        lines = f.readlines()
+        for index, line in enumerate(lines):
+            line = line.split(':')
+            if len(line) != 2:
+                continue
+            if str(line[0]) in legend_dic:
+                line[1] = line[1].strip()
+                legend_dic[str(line[0])] = str(line[1])
+
+
 if __name__ == '__main__':
+    read_legend()
     cluster_a = []
     cluster_b = []
     with open("data1.txt", 'r') as f:
@@ -85,9 +105,11 @@ if __name__ == '__main__':
              zorder=1)
     plt.axis('equal')
 
-    plt.scatter(cluster_a[0], cluster_a[1], marker='o', color="#0D4C6D", edgecolors="#000000", label="cluster 1", alpha=0.6)
-    plt.scatter(cluster_b[0], cluster_b[1], marker='o', color="#BF1E2E", edgecolors="#000000", label="cluster 2", alpha=0.6)
+    plt.scatter(cluster_a[0], cluster_a[1], marker='o', color="#0D4C6D", edgecolors="#000000", label=legend_dic["cluster1"], alpha=0.6)
+    plt.scatter(cluster_b[0], cluster_b[1], marker='o', color="#BF1E2E", edgecolors="#000000", label=legend_dic["cluster2"], alpha=0.6)
 
     plt.legend(loc="upper left", fontsize='x-large')
-    plt.title("K-means Result", fontsize='xx-large', verticalalignment='bottom')
+    plt.title(legend_dic["title"], fontsize='xx-large', verticalalignment='bottom')
+    plt.xlabel(legend_dic["xlabel"], fontsize='x-large')
+    plt.ylabel(legend_dic["ylabel"], fontsize='x-large')
     plt.show()
