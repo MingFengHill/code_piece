@@ -1,0 +1,4 @@
+title:K-means结果
+xlabel:x轴
+ylabel:y轴
+featrue_id:0,1
